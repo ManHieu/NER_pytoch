@@ -3,6 +3,7 @@ import re
 import numpy as np
 import unicodedata
 import string
+from nltk.tokenize import word_tokenize
 
 
 def unicodeToAscii(s):
@@ -10,6 +11,22 @@ def unicodeToAscii(s):
         c for c in unicodedata.normalize('NFD', s)
         if unicodedata.category(c) != 'Mn' and c in string.ascii_letters + " .,;'-"
     )
+
+def to_lower(text):
+    return text.lower()
+
+def remove_numbers(text):
+    return re.sub(r'\d+', '', text)
+
+def remove_punctua(text):
+    translator = str.maketrans('', '', string.punctuation)
+    return text.translate(translator)
+
+def remove_whitespace(text):
+    return text.strip()
+    
+def tokenization(text):
+    return word_tokenize(text)
 
 def zero_digits(s):
     return re.sub(r'\d', '0', s)
